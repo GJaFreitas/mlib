@@ -18,19 +18,17 @@ static inline char	*choose_buffer(char *static_buf, char *fmt)
 
 char	*mstrcatvprintf(char *s, const char *fmt, va_list ap)
 {
-	char	static_buf[BUFFER_SIZE];
-	char	*buf;
+	char		static_buf[BUFFER_SIZE];
+	char		*buf;
 	uint64_t	buflen;
-	char	*s;
+	char		*s;
 
 	buf = choose_buffer(static_buf, fmt, &buflen);
-
 	/*
-	 *
-	 * Printf code here
-	 *
-	 */
-
+		*
+		* Printf code here
+		*
+		*/
 	s = mstrnew(buf);
 	if (buf != static_buf)
 		free(buf);

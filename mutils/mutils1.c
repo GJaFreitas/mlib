@@ -2,9 +2,9 @@
 
 void	*mutils_memcpy(void *dst, const void *src, uint64_t n)
 {
-	uint64_t	i;
-	uint8_t		*cdst;
-	const uint8_t		*csrc = src;
+	uint64_t		i;
+	uint8_t			*cdst;
+	const uint8_t	*csrc = src;
 
 	i = 0;
 	cdst = dst;
@@ -19,9 +19,9 @@ void	*mutils_memcpy(void *dst, const void *src, uint64_t n)
 	return (dst);
 }
 
-void	*mutils_memset(void * ptr, uint8_t byte, uint64_t len)
+void	*mutils_memset(void *ptr, uint8_t byte, uint64_t len)
 {
-	uint8_t	*cast;
+	uint8_t		*cast;
 	uint64_t	i;
 
 	cast = ptr;
@@ -36,8 +36,6 @@ void	*mutils_memset(void * ptr, uint8_t byte, uint64_t len)
 
 int64_t	mutils_nextpow2(int64_t n)
 {
-	 // compute the next highest power of 2 of 32-bit v
-
 	n--;
 	n |= n >> 1;
 	n |= n >> 2;
