@@ -13,7 +13,7 @@ static inline char	*choose_buffer(char *static_buf, char *fmt)
 		return (static_buf);
 	}
 	buflen = len;
-	return (malloc(len + 1));
+	return (mstralloc(len + 1));
 }
 
 char	*mstrcatvprintf(char *s, const char *fmt, va_list ap)

@@ -1,15 +1,19 @@
 #pragma once
 
 #include "mutils.h"
+#include "marena.h"
+
 #include <limits.h>
 #include <stdarg.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NO_ZERO -1
-#define BUFFER_SIZE 1024
-#define WHITESPACE "\n\t\r\v "
+#define NO_ZERO		-1
+#define NO_ARENA	-1
+#define BUFFER_SIZE	1024
+#define WHITESPACE	"\n\t\r\v "
+#define	ALLOCSIZE_MASK	0xf000000000000000
 
 typedef struct s_mstr
 {
@@ -54,6 +58,9 @@ static inline char	*choose_buffer(char *static_buf, char *fmt);
 char	*mstrcatvprintf(char *s, const char *fmt, va_list ap);
 char	*mstrcatprintf(char *s, const char *fmt, ...);
 void	mstrsubstitute(char *s, char *pattern, char *substitution);
+void	mstrsetalloc(t_marena *a);
+void	*mstralloc(uint64_t bytes);
+int32_t	is_arena_allocation(void);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * *
 

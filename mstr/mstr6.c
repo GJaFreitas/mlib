@@ -34,7 +34,7 @@ char	**mstrtokenize(const char *s, const char *separators)
 	j = 0;
 	i = 0;
 	count = _get_token_amount(s, separators);
-	arr = malloc(sizeof(char *) * (count + 1));
+	arr = mstralloc(sizeof(char *) * (count + 1));
 	arr[count] = NULL;
 	count = 0;
 	while (s[i])
@@ -70,7 +70,7 @@ char	**mstrtokenizetrim(const char *s, const char *separators)
 	j = 0;
 	i = 0;
 	count = _get_token_amount(s, separators);
-	arr = malloc(sizeof(char *) * (count + 1));
+	arr = mstralloc(sizeof(char *) * (count + 1));
 	arr[count] = NULL;
 	count = 0;
 	while (s[i])

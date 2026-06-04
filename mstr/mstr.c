@@ -33,7 +33,7 @@ char	*mstrnewlen(const char *init, uint64_t size)
 		if (l > size)
 			size = l;
 	}
-	t = malloc(sizeof(t_mstr) + size + 1);
+	t = mstralloc(sizeof(t_mstr) + size + 1);
 	s = (char *)t + sizeof(t_mstr);
 	if (init)
 		mutils_memcpy(s, init, l);
@@ -41,6 +41,8 @@ char	*mstrnewlen(const char *init, uint64_t size)
 		mutils_memset(s + l, 0, size - l);
 	t->len = l;
 	t->alloc = size;
+	if (is_arena_allocation())
+		t->alloc |= ALLOCSIZE_MASK;
 	s[size] = 0;
 	return (s);
 }

@@ -13,7 +13,7 @@ char	*mstrensuresize(char *s, uint64_t size)
 	char	*new_str;
 
 	t = mstr_getptr(s);
-	if (t->alloc >= size)
+	if (mstrallocsize(s) >= size)
 		return (s);
 	new_str = mstrnewlen(s, size);
 	mstrdestroy(s);

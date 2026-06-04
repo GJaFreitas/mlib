@@ -1,4 +1,5 @@
 #include "mstr.h"
+#include <stdint.h>
 
 char	*mstrnew(const char *init)
 {
@@ -9,13 +10,15 @@ char	*mstrnew(const char *init)
 	if (!init)
 		return (NULL);
 	l = _strlen(init);
-	t = malloc(sizeof(t_mstr) + l + 1);
+	t = mstralloc(sizeof(t_mstr) + l + 1);
 	if (!t)
 		return (NULL);
 	s = (char *)t + sizeof(t_mstr);
 	mutils_memcpy(s, init, l);
 	t->len = l;
 	t->alloc = l;
+	if (is_arena_allocation())
+		t->alloc |= ALLOCSIZE_MASK;
 	s[l] = 0;
 	return (s);
 }
@@ -25,7 +28,7 @@ uint64_t	mstrallocsize(char *s)
 	t_mstr	*t;
 
 	t = mstr_getptr(s);
-	return (t->alloc);
+	return (t->alloc & ~ALLOCSIZE_MASK);
 }
 
 void	mstrsetlen(char *s, uint64_t len)
