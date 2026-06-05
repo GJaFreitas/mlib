@@ -54,6 +54,8 @@ void	mstrdestroy(char *s)
 	t_mstr	*t;
 
 	t = mstr_getptr(s);
+	if (t->alloc & ALLOCSIZE_MASK)
+		return ;
 	free(t);
 }
 
