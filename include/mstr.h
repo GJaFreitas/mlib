@@ -57,7 +57,7 @@ char	*mstrnewlen(const char *init, uint64_t size);
 static inline char	*choose_buffer(char *static_buf, char *fmt);
 char	*mstrcatvprintf(char *s, const char *fmt, va_list ap);
 char	*mstrcatprintf(char *s, const char *fmt, ...);
-void	mstrsubstitute(char *s, char *pattern, char *substitution);
+char	*mstrsubstitute(char *s, char *pattern, char *substitution);
 void	mstrsetalloc(t_marena *a);
 void	*mstralloc(uint64_t bytes);
 int32_t	is_arena_allocation(void);

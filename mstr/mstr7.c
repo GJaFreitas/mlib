@@ -2,7 +2,8 @@
 #include "mutils.h"
 #include <stdint.h>
 
-static inline int64_t	_calculate_size(char *s, char *pattern, char *substitution)
+static inline int64_t
+	_calculate_size(char *s, char *pattern, char *substitution)
 {
 	int64_t	i;
 	int64_t	sublen;
@@ -29,36 +30,17 @@ static inline int64_t	_calculate_size(char *s, char *pattern, char *substitution
 	return (_strlen(s) + (count * (sublen - patternlen)));
 }
 
-/* * * * * * * * * * * * * * * * * * * * * * * * *
-
-   - Subsitutes every instance of the mstr 'pattern' with 'substitute', neither can be NULL
-
-   - 'pattern' and 'substitution' must be mstr's initialized with the right size
-
-   - The original pointer is assumed to be freed and can't be used
-
-   - 'pattern' and 'substitution' are destroyed
-
- * * * * * * * * * * * * * * * * * * * * * * * * */
-void	mstrsubstitute(char *s, char *pattern, char *substitution)
+static void	_loop(char *s, char *pattern, char *substitution, char *temp)
 {
-	int64_t	size;
 	uint64_t	j;
 	uint64_t	i;
-	char		*temp;
 
-	size = _calculate_size(s, pattern, substitution);
-	temp = mstrnew(s);
-	if (size != -1)
-	{
-		mstrdestroy(s);
-		s = mstrnewlen(temp, size);
-	}
 	i = 0;
 	j = 0;
 	while (temp[i])
 	{
-		if (temp[i] == *pattern && !mstrncmp(&temp[i], pattern, mstrlen(pattern)))
+		if (temp[i] == *pattern && \
+			!mstrncmp(&temp[i], pattern, mstrlen(pattern)))
 		{
 			mutils_memcpy(&s[j], substitution, mstrlen(substitution));
 			j += mstrlen(substitution);
@@ -68,5 +50,35 @@ void	mstrsubstitute(char *s, char *pattern, char *substitution)
 		i++;
 		j++;
 	}
-	mstrdestroy(pattern); mstrdestroy(substitution); mstrdestroy(temp);
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * *
+
+   - Subsitutes every instance of the mstr 'pattern' with 'substitute', neither
+   can be NULL
+
+   - 'pattern' and 'substitution' must be mstr's initialized with the right size
+
+   - The original pointer is assumed to be freed and can't be used
+
+   - 'pattern' and 'substitution' are destroyed
+
+ * * * * * * * * * * * * * * * * * * * * * * * * */
+char	*mstrsubstitute(char *s, char *pattern, char *substitution)
+{
+	int64_t		size;
+	char		*temp;
+
+	temp = mstrnew(s);
+	size = _calculate_size(s, pattern, substitution);
+	if (size != -1)
+	{
+		mstrdestroy(s);
+		s = mstrnewlen(temp, size);
+	}
+	_loop(s, pattern, substitution, temp);
+	mstrdestroy(pattern);
+	mstrdestroy(substitution);
+	mstrdestroy(temp);
+	return (s);
 }
