@@ -47,12 +47,12 @@ char	*mstrnewlen(const char *init, uint64_t size)
 	return (s);
 }
 
-int	main(void)
-{
-	char	*str;
-	char	*str2;
-	char	*str3;
-
+// int	main(void)
+// {
+// 	char	*str;
+// 	char	*str2;
+// 	char	*str3;
+//
 // 	str = mstrnew("Hello world!");
 // 	printf("String: %s mstr size: %ld\n", str, mstrallocsize(str));
 // 	str = mstrconstcat(str, " Goodbye world!");
@@ -102,4 +102,4 @@ int	main(void)
 	// printf("String: %s\n", s);
 	// mstrsubstitute(s, pattern, sub);
 	// printf("After sub: %s\n", s);
-}
+// }
