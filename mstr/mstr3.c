@@ -9,10 +9,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * */
 char	*mstrensuresize(char *s, uint64_t size)
 {
-	t_mstr	*t;
 	char	*new_str;
 
-	t = mstr_getptr(s);
 	if (mstrallocsize(s) >= size)
 		return (s);
 	new_str = mstrnewlen(s, size);
@@ -90,7 +88,6 @@ char	*mstrsrch(char *s, const char *pattern)
 char	*mstrch(const char *s, const char c)
 {
 	uint64_t	i;
-	char		*ch;
 
 	i = 0;
 	while (s[i])

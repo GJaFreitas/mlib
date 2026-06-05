@@ -38,12 +38,10 @@ char	*mstrtrim(char *s, const char *remove)
  * * * * * * * * * * * * * * * * * * * * * * * * */
 char	*mstrtrimpattern(char *s, const char *pattern)
 {
-	uint64_t	i;
 	uint64_t	pattern_len;
 	int64_t		l;
 	char		*found;
 
-	i = 0;
 	l = 0;
 	pattern_len = _strlen(pattern);
 	mstrupdatelen(s);
