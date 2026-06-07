@@ -10,7 +10,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * */
 static t_marena	*_cur_alloc(t_marena *a)
 {
-	static t_marena	*cur_arena;
+	static t_marena	*cur_arena = NULL;
 
 	if (a == NULL)
 		return (cur_arena);
@@ -35,7 +35,7 @@ void	*mstralloc(uint64_t bytes)
 
 	a = _cur_alloc(NULL);
 	if (a == NULL)
-		return (mstralloc(bytes));
+		return (malloc(bytes));
 	else
 		return (marenapush(a, bytes));
 }

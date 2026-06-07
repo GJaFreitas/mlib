@@ -25,7 +25,7 @@ static inline int64_t
 		}
 		i++;
 	}
-	if (mstrallocsize(s) > (count * (sublen - patternlen)))
+	if ((int64_t)mstrallocsize(s) > (count * (sublen - patternlen)))
 		return (-1);
 	return (_strlen(s) + (count * (sublen - patternlen)));
 }
