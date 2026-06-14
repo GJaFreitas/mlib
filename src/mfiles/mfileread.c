@@ -38,6 +38,7 @@ void	mfileread(t_file *mf)
 		if (mf->content)
 			mstrdestroy(mf->content);
 		mf->content = mstrcat(mstrnew(buf), mfilereadwholefile(mf->fd));
+		mf->alloc = mstrallocsize(mf->content);
 	}
 	else
 		mutils_memcpy(mf->content, buf, bytes);

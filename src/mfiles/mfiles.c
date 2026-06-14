@@ -69,7 +69,7 @@ t_file	*mfilestdin(void)
 
 void	mfilewrite(t_file *file)
 {
-	write(file->fd, file->content, file->alloc);
+	write(file->fd, file->content, mstrlen(file->content));
 }
 
 void	mfiledestroy(t_file *file)
