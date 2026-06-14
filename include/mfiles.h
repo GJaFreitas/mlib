@@ -9,6 +9,7 @@
 
 typedef struct s_file
 {
+	int32_t		is_arena;
 	uint32_t	fd;
 	uint64_t	alloc;
 	char		*content;

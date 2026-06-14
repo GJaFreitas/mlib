@@ -40,10 +40,7 @@ void	*mstralloc(uint64_t bytes)
 		return (marenapush(a, bytes));
 }
 
-int32_t	is_arena_allocation(void)
+void	*is_arena_allocation(void)
 {
-	if (_cur_alloc(NULL))
-		return (1);
-	else
-		return (0);
+	return (_cur_alloc(NULL));
 }

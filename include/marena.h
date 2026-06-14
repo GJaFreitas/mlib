@@ -29,3 +29,5 @@ void				marenadestroy(t_marena *a);
 void				*marenapush(t_marena *a, uint64_t bytes);
 void				marenapop(t_marena *a, uint64_t bytes);
 void				marenaclear(t_marena *a);
+
+uint64_t			marena_totalused(t_marena *a);

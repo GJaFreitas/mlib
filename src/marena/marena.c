@@ -1,5 +1,6 @@
 #include "marena.h"
 #include "mutils.h"
+#include <stdint.h>
 
 t_marena	*marenanew(uint64_t size, int32_t flags)
 {
@@ -70,15 +71,17 @@ void	marenapop(t_marena *_a, uint64_t bytes)
 	}
 }
 
-void	marenaclear(t_marena *_a)
+void	marenaclear(t_marena *passed)
 {
 	t_marena	*a;
 
-	_a->used = 0;
-	_a->cur = _a;
-	if (_a->next)
+	mutils_memset(passed->mem, 0, passed->used);
+	passed->used = 0;
+	passed->cur = passed;
+	if (passed->next)
 	{
-		a = _a->next;
+		a = passed->next;
+		mutils_memset(a->mem, 0, a->used);
 		marenadestroy(a->next);
 		a->next = NULL;
 		a->used = 0;

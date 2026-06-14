@@ -25,6 +25,7 @@ t_file	*mfilenew(const char *filename, int oflag, int flags)
 	if (fd == -1)
 		return (NULL);
 	file = mstralloc(sizeof(t_file));
+	file->is_arena = !(is_arena_allocation() == NULL);
 	file->fd = fd;
 	file->alloc = 0;
 	file->content = NULL;
@@ -76,5 +77,6 @@ void	mfiledestroy(t_file *file)
 {
 	close(file->fd);
 	mstrdestroy(file->content);
-	free(file);
+	if (!file->is_arena)
+		free(file);
 }

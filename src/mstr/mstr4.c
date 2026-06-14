@@ -54,7 +54,7 @@ void	mstrdestroy(char *s)
 	t_mstr	*t;
 
 	t = mstr_getptr(s);
-	if (t->alloc & ALLOCSIZE_MASK)
+	if (t->arena)
 		return ;
 	free(t);
 }
@@ -79,7 +79,8 @@ char	*mstrconstcat(char *str1, const char *literal)
 	s = mstrnewlen((char *)(const char *)NO_ZERO, len + lencat);
 	mutils_memcpy(s, str1, len);
 	mutils_memcpy(s + len, literal, lencat);
-	mstrdestroy(str1);
+	if (str1)
+		mstrdestroy(str1);
 	mstrsetlen(s, len + lencat);
 	return (s);
 }

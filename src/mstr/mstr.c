@@ -41,8 +41,7 @@ char	*mstrnewlen(const char *init, uint64_t size)
 		mutils_memset(s + l, 0, size - l);
 	t->len = l;
 	t->alloc = size;
-	if (is_arena_allocation())
-		t->alloc |= ALLOCSIZE_MASK;
+	t->arena = is_arena_allocation();
 	s[size] = 0;
 	return (s);
 }

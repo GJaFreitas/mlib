@@ -17,6 +17,7 @@
 
 typedef struct s_mstr
 {
+	void		*arena;
 	uint64_t	len;
 	uint64_t	alloc;
 }				t_mstr;
@@ -60,7 +61,7 @@ char	*mstrcatprintf(char *s, const char *fmt, ...);
 char	*mstrsubstitute(char *s, char *pattern, char *substitution);
 void	mstrsetalloc(t_marena *a);
 void	*mstralloc(uint64_t bytes);
-int32_t	is_arena_allocation(void);
+void	*is_arena_allocation(void);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * *
 
